@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     username: DataTypes.STRING,
-    tg_id: DataTypes.INTEGER
+    tg_id: DataTypes.BIGINT
   }, {
     sequelize,
     modelName: 'User',

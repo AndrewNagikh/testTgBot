@@ -13,7 +13,7 @@ module.exports = {
         unique: true,
       },
       tg_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         unique: true,
       },
       createdAt: {
