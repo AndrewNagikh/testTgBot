@@ -1,7 +1,7 @@
 # testTgBot
 Для запуск бота понадобится:  
     -- установить все зависимости - npm i  
-    -- Настроить .env файл:  
+    -- Настроить .env файл (см  env exapmle):  
             - PORT для выбора порта на котором будет запускаться сервер  
             - DATABASE_URL для настройки БД (postgresUser - ваш пользователь postgres, postgresUserPass - пароль пользователя,       databaseName - название БД произвольное)  
             - TELEGRAM_TOKEN токен который выдает @BotFather при создании бота для доступа к HTTP API  
