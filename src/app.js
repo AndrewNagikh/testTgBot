@@ -8,7 +8,7 @@ const { Telegraf } = require('telegraf');
 const { User } = require('../db/models');
 const {
   mainMenu, stopMenu, sendMenu, broadcast,
-} = require('../lib/keyboard');
+} = require('../lib/controllers');
 
 const { sequelize } = require('../db/models');
 
@@ -24,7 +24,6 @@ const bot = new Telegraf(TELEGRAM_TOKEN);
 bot.start(async (ctx) => {
   const { first_name } = ctx.message.from;
   try {
-    console.log(ctx.message);
     await User.create({ username: first_name, tg_id: ctx.chat.id });
     ctx.reply('Здравствуйте, нажмите на любую интересующую вас кнопку', mainMenu());
   } catch (error) {
@@ -47,15 +46,14 @@ bot.hears('☀️Погода', async (ctx) => {
     weather.sky = canadaWeatherRes.weather[0].main;
     weather.temp = (canadaWeatherRes.main.temp - 273.15).toFixed(2);
     weather.tempFeels = (canadaWeatherRes.main.feels_like - 273.15).toFixed(2);
-    ctx.reply(`Weather in ${weather.country}\n${weather.sky} sky\nTemperature ${weather.temp}, feels like ${weather.tempFeels}`);
+    ctx.reply(`Weather in ${weather.country}\n${weather.sky} sky\nTemperature ${weather.temp}°C, feels like ${weather.tempFeels}°C`);
   }
 });
 
 bot.hears('📖 Хочу почитать', async (ctx) => {
-  const document = 'https://drive.google.com/file/d/1Xs_YjOLgigsuKl17mOnR_488MdEKloCD/view';
   ctx.sendPhoto('https://pythonist.ru/wp-content/uploads/2020/03/photo_2021-02-03_10-47-04-350x2000-1.jpg', { caption: 'Идеальный карманный справочник для быстрого ознакомления с особенностями работы разработчиков на Python. Вы найдете море краткой информации о типах и операторах в Python, именах специальных методов, встроенных функциях, исключениях и других часто используемых стандартных модулях' });
   ctx.replyWithDocument({
-    url: document,
+    url: 'https://drive.google.com/file/d/1Xs_YjOLgigsuKl17mOnR_488MdEKloCD/view',
     filename: 'file.zip',
   });
 });
